@@ -133,7 +133,7 @@ namespace SkalProj_Datastrukturer_Minne
 			Console.WriteLine("Examine a List: \n"
 				+ "\n+Value"
 				+ "\n-Value"
-				+ "\n0 - Return to Main Menu");
+				+ "\n0 - Return to Main Menu\n");
 
 			List<string> theList = new List<string>(); // The list to store content and to be examined
 			bool returnToMainMenu = false;
@@ -302,7 +302,7 @@ namespace SkalProj_Datastrukturer_Minne
 							Console.WriteLine("Input string to reverse: ");
 							var text = Console.ReadLine();
 							var reversed = ReverseText(text);
-							Console.WriteLine($"Reversed: {reversed}");
+							Console.WriteLine($"\nReversed: {reversed}\n");
 							break;
 						case '0': // Return to main menu
 							returnToMainMenu = true;
@@ -358,7 +358,7 @@ namespace SkalProj_Datastrukturer_Minne
 						Console.WriteLine("Input string to check: ");
 						var text = Console.ReadLine();
 						var result = CheckStringForParanthesis(text);
-						Console.WriteLine($"Format is correct: {result}");
+						Console.WriteLine("\nFormat is " + (result ? "correct" : "incorrect") + ".\n");
 						break;
 					case '0': // Return to main menu
 						return;
