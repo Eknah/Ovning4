@@ -130,13 +130,6 @@ namespace SkalProj_Datastrukturer_Minne
              * Below you can see some inspirational code to begin working.
             */
 
-			//List<string> theList = new List<string>();
-			//string input = Console.ReadLine();
-			//char nav = input[0];
-			//string value = input.substring(1);
-
-			//switch(nav){...}
-
 			Console.WriteLine("Examine a List: \n"
 				+ "\n+Value"
 				+ "\n-Value"
@@ -192,54 +185,62 @@ namespace SkalProj_Datastrukturer_Minne
 			 * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
 			*/
 
-			Console.WriteLine("Examine a Queue: \n"
-					+ "\nt - Test"
-					+ "\n0 - Return to Main Menu");
+			bool returnToMainMenu = false;
 
-			Queue<string> theQueue = new Queue<string>();
-			List<string>? queueOperations = null;
-
-			string? input = Console.ReadLine();
-			if (input != null)
+			while (!returnToMainMenu)
 			{
 
-				char? nav = input[0]; // Get first character in input string
-				string value = input.Substring(1); // Get remaining part of input string
+				Console.WriteLine("Examine a Queue: \n"
+						+ "\nt - Test"
+						+ "\n0 - Return to Main Menu");
 
-				switch (nav)
-				{
-					case 't': // Test queue
-						queueOperations = TestQueue();
-						break;
-					case '0': // return to main menu
-						return;
-					default: // Invalid input
-						Console.WriteLine("Please enter a valid input.");
-						break;
-				}
-			}
+				Queue<string> theQueue = new Queue<string>();
+				List<string>? queueOperations = null;
 
-			if (queueOperations != null) // Check if the test queue data has been obtained from the ICA queue simulation
-			{
-				foreach (string operation in queueOperations)
+				string? input = Console.ReadLine();
+				if (input != null)
 				{
-					switch (operation) // Each entry is either a name to be enqueued or a dequeue-command
+
+					char? nav = input[0]; // Get first character in input string
+					string value = input.Substring(1); // Get remaining part of input string
+
+					switch (nav)
 					{
-						case "Dequeue": // Deqeueu
-							theQueue.Dequeue();
+						case 't': // Test queue
+							queueOperations = TestQueue();
 							break;
-						default: // Enqueue, entry is a name
-							theQueue.Enqueue(operation);
+						case '0': // return to main menu
+							returnToMainMenu = true;
+							break;
+						default: // Invalid input
+							Console.WriteLine("Please enter a valid input.");
 							break;
 					}
-
-					// Print contents after each queue operation
-					Console.WriteLine($"Current Queue Count: {theQueue.Count}");
-					Console.Write($"Current contents:");
-					foreach (var entry in theQueue)
-						Console.Write($" '{entry}'");
-					Console.WriteLine();
 				}
+
+				if (queueOperations != null) // Check if the test queue data has been obtained from the ICA queue simulation
+				{
+					foreach (string operation in queueOperations)
+					{
+						switch (operation) // Each entry is either a name to be enqueued or a dequeue-command
+						{
+							case "Dequeue": // Deqeueu
+								theQueue.Dequeue();
+								break;
+							default: // Enqueue, entry is a name
+								theQueue.Enqueue(operation);
+								break;
+						}
+
+						// Print contents after each queue operation
+						Console.WriteLine($"Current Queue Count: {theQueue.Count}");
+						Console.Write($"Current contents:");
+						foreach (var entry in theQueue)
+							Console.Write($" '{entry}'");
+						Console.WriteLine();
+					}
+				}
+
 			}
 		}
 
@@ -279,30 +280,37 @@ namespace SkalProj_Datastrukturer_Minne
 			*/
 
 
-			Console.WriteLine("Examine a Queue: \n"
-					+ "\nr - Reverse Text"
-					+ "\n0 - Return to Main Menu");
+			bool returnToMainMenu = false;
 
-			string? input = Console.ReadLine(); // Get user action
-
-			if (input != null)
+			while (!returnToMainMenu)
 			{
-				char? nav = input[0]; // Get first char in input string
-				string value = input.Substring(1); // Get remaining part of input string
 
-				switch (nav)
+				Console.WriteLine("Examine a Queue: \n"
+						+ "\nr - Reverse Text"
+						+ "\n0 - Return to Main Menu");
+
+				string? input = Console.ReadLine(); // Get user action
+
+				if (input != null)
 				{
-					case 'r': // Reverse
-						Console.WriteLine("Input string to reverse: ");
-						var text = Console.ReadLine();
-						var reversed = ReverseText(text);
-						Console.WriteLine($"Reversed: {reversed}");
-						break;
-					case '0': // Return to main menu
-						return;
-					default: // Invalid input
-						Console.WriteLine("Please enter a valid input.");
-						break;
+					char? nav = input[0]; // Get first char in input string
+					string value = input.Substring(1); // Get remaining part of input string
+
+					switch (nav)
+					{
+						case 'r': // Reverse
+							Console.WriteLine("Input string to reverse: ");
+							var text = Console.ReadLine();
+							var reversed = ReverseText(text);
+							Console.WriteLine($"Reversed: {reversed}");
+							break;
+						case '0': // Return to main menu
+							returnToMainMenu = true;
+							break;
+						default: // Invalid input
+							Console.WriteLine("Please enter a valid input.");
+							break;
+					}
 				}
 			}
 		}
@@ -379,13 +387,13 @@ namespace SkalProj_Datastrukturer_Minne
 				foreach (char c in text) // Iterate through all letters
 				{
 					if (openings.Contains(c)) // Found an opening paranthesis
-					{ 
+					{
 						openingChars.Push(c); // Push to stack
 					}
 					else if (closings.Contains(c)) // Found a closing paranthesis
 					{
 						if (Array.IndexOf(openings, openingChars.Peek()) // Check if the last pushed opening is of the same type
-						== Array.IndexOf(closings, c))					 // as the currently found closing paranthesis
+						== Array.IndexOf(closings, c))                   // as the currently found closing paranthesis
 						{
 							openingChars.Pop(); // Then pop the last found opening
 						}
